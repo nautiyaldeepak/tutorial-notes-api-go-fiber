@@ -8,3 +8,6 @@ postgresql:
         username: "test-user"
         password: "abc123d"
         database: "notes-db"
+
+kube-prometheus:
+  enabled: true

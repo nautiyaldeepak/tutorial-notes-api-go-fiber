@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prom-service-monitor
+spec:
+  endpoints:
+    - interval: 15s
+      scrapeTimeout: 14s
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: prom-sm
