@@ -40,3 +40,8 @@ jobs:
           kind version
           kind get clusters
           kind load docker-image notes:v1 --name chart-testing
+          kubectl version
+          kubectl create deployment my-deployment --image=notes:v1
+          kubectl get pods
+          sleep 30
+          kubectl get pods
