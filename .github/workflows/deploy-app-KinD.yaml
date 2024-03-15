@@ -40,9 +40,9 @@ jobs:
           kind version
           kind get clusters
           kind load docker-image notes:v1 --name chart-testing
-          kubectl version
-          kubectl create deployment my-deployment --image=notes:v1
-          kubectl get pods
+          helm version
+          helm install notes helm-charts/notes/
           sleep 30
-          kubectl get pods
-          kubectl describe pods
+          kubectl get all
+          sleep 60
+          kubectl get all
