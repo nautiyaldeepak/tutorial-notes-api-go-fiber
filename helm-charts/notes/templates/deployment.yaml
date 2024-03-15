@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      initContainers:
+      - name: check-db-ready
+        image: postgres:9.6.5
+        command: ['sh', '-c', 
+          'until pg_isready -h notes-postgresql.default.svc.cluster.local -p 5432; 
+          do echo waiting for database; sleep 2; done;']
+      containers:
+      - name: notes
+        image: notes:v1
+        env:
+        - name: DB_HOST
+          value: "notes-postgresql.default.svc.cluster.local"
+        - name: DB_NAME
+          value: "notes-db"
+        - name: DB_USER
+          value: "test-user"
+        - name: DB_PASSWORD
+          value: "abc123d"
+        - name: DB_PORT
+          value: "5432"
+        livenessProbe:
+          httpGet:
+            path: /alive
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        ports:
+        - name: app-port
+          containerPort: 3000
