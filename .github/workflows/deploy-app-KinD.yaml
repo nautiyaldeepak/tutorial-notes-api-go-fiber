@@ -31,7 +31,7 @@ jobs:
           path: /tmp
       - name: Load Docker image from tarball
         run: |
-          docker load --input /tmp/calc.tar
+          docker load --input /tmp/notes.tar
           docker image ls -a   
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@v1 
