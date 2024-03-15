@@ -38,4 +38,5 @@ jobs:
       - name: Run KinD commands
         run: |
           kind version
-          kind load docker-image notes:v1
+          kind get clusters
+          kind load docker-image notes:v1 --name chart-testing
