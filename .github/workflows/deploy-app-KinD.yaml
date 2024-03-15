@@ -49,7 +49,8 @@ jobs:
         run: |
           helm version
           helm install notes helm-charts/notes/
-          sleep 30
           kubectl get all
-          sleep 60
+          echo "++++++++++++++++++++++++++++++++++++++++++"
+          echo "++++++++++++++++++++++++++++++++++++++++++"
+          sleep 120
           kubectl get all
